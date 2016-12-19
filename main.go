@@ -19,9 +19,8 @@ func getExtensionFromFileName(filename string) string {
 
 	if len(splitedString) > 1 {
 		return splitedString[1]
-	} else {
-		return ""
 	}
+	return ""
 }
 
 func main() {
