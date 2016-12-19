@@ -9,12 +9,12 @@ import (
 	"gopkg.in/gographics/imagick.v2/imagick"
 )
 
-func Exists(filename string) bool {
+func exists(filename string) bool {
 	_, err := os.Stat(filename)
 	return err == nil
 }
 
-func GetExtensionFromFileName(filename string) string {
+func getExtensionFromFileName(filename string) string {
 	splitedString := strings.Split(filename, ".")
 
 	if len(splitedString) > 1 {
@@ -38,11 +38,11 @@ func main() {
 		os.Exit(1)
 	}
 
-	if !Exists(inputFile) {
+	if !exists(inputFile) {
 		fmt.Printf("'%s' not exists.\n", inputFile)
 		os.Exit(1)
 	}
-	extension = GetExtensionFromFileName(inputFile)
+	extension = getExtensionFromFileName(inputFile)
 
 	imagick.Initialize()
 	defer imagick.Terminate()
