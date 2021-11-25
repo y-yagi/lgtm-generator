@@ -6,8 +6,13 @@ import (
 	"os"
 	"strings"
 
+	_ "embed"
+
 	"gopkg.in/gographics/imagick.v1/imagick"
 )
+
+//go:embed lgtm.gif
+var lgtmImage []byte
 
 func exists(filename string) bool {
 	_, err := os.Stat(filename)
@@ -51,7 +56,7 @@ func main() {
 	result := imagick.NewMagickWand()
 
 	source.ReadImage(inputFile)
-	lgtm.ReadImage("lgtm.gif")
+	lgtm.ReadImageBlob(lgtmImage)
 
 	sourceWidth := source.GetImageWidth()
 	sourceHeight := source.GetImageHeight()
