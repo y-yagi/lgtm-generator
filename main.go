@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 
@@ -76,6 +77,8 @@ func main() {
 	lgtm.Destroy()
 	coalescedImages.Destroy()
 
-	result.WriteImages(outputFile+"."+extension, true)
+	if err := result.WriteImages(outputFile+"."+extension, true); err != nil {
+		log.Fatal(err)
+	}
 	result.Destroy()
 }
