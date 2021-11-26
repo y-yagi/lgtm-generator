@@ -9,7 +9,7 @@ import (
 
 	_ "embed"
 
-	"gopkg.in/gographics/imagick.v1/imagick"
+	"gopkg.in/gographics/imagick.v2/imagick"
 )
 
 //go:embed lgtm.gif
