@@ -10,7 +10,7 @@ import (
 
 	_ "embed"
 
-	"gopkg.in/gographics/imagick.v2/imagick"
+	"gopkg.in/gographics/imagick.v3/imagick"
 )
 
 //go:embed lgtm.gif
@@ -61,7 +61,7 @@ func main() {
 	for i := 1; i <= int(coalescedImages.GetNumberImages()); i++ {
 		coalescedImages.SetIteratorIndex(i)
 		tmpImage := coalescedImages.GetImage()
-		tmpImage.CompositeImage(lgtm, imagick.COMPOSITE_OP_OVER, 0, 0)
+		tmpImage.CompositeImage(lgtm, imagick.COMPOSITE_OP_OVER, false, 0, 0)
 		result.AddImage(tmpImage)
 		tmpImage.Destroy()
 	}
