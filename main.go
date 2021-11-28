@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 
 	_ "embed"
 
@@ -22,10 +23,10 @@ func exists(filename string) bool {
 
 func main() {
 	var inputFile string
-	var outputFile string
+	var outputDir string
 
 	flag.StringVar(&inputFile, "i", "", "input file")
-	flag.StringVar(&outputFile, "o", "result", "output file")
+	flag.StringVar(&outputDir, "o", ".", "output directory")
 	flag.Parse()
 
 	if len(inputFile) == 0 {
@@ -37,7 +38,8 @@ func main() {
 		fmt.Printf("'%s' not exists.\n", inputFile)
 		os.Exit(1)
 	}
-	extension := filepath.Ext(inputFile)
+	filenameAndExt := strings.Split(filepath.Base(inputFile), ".")
+	resultFilename := filepath.Join(outputDir, filenameAndExt[0]+"_lgtm."+filenameAndExt[1])
 
 	imagick.Initialize()
 	defer imagick.Terminate()
@@ -67,7 +69,7 @@ func main() {
 	lgtm.Destroy()
 	coalescedImages.Destroy()
 
-	if err := result.WriteImages(outputFile+extension, true); err != nil {
+	if err := result.WriteImages(resultFilename, true); err != nil {
 		log.Fatal(err)
 	}
 	result.Destroy()
