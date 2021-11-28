@@ -73,4 +73,6 @@ func main() {
 		log.Fatal(err)
 	}
 	result.Destroy()
+
+	fmt.Printf("'%s' was generated\n", resultFilename)
 }
